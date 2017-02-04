@@ -22,12 +22,16 @@ let sideWindow = null;
 //     autoSubmit: true
 // });
 
-ipcMain.on('timerFirstTick', (event, date) => {
+ipcMain.on('timerFirstTick', (_event, date) => {
   sideWindow.webContents.send('timerFirstTick', date);
 });
 
-ipcMain.on('timerLastTick', (event, date) => {
+ipcMain.on('timerLastTick', (_event, date) => {
   sideWindow.webContents.send('timerLastTick', date);
+});
+
+ipcMain.on('messageUpdate', (_event, msg) => {
+  sideWindow.webContents.send('messageUpdate', msg);
 });
 
 app.on('window-all-closed', function onWindowAllClosed() {
@@ -39,16 +43,16 @@ app.on('window-all-closed', function onWindowAllClosed() {
 app.on('ready', function onReady() {
   mainWindow = new BrowserWindow({
     title: 'Zegar - panel',
-    width: 1600,
-    height: 900
+    width: 1200,
+    height: 800
   });
 
   delete mainWindow.module;
 
   sideWindow = new BrowserWindow({
     title: 'Zegar - ekran',
-    width: 1600,
-    height: 900
+    width: 1200,
+    height: 800
   });
 
   delete sideWindow.module;
@@ -65,8 +69,8 @@ app.on('ready', function onReady() {
   mainWindow.loadURL(emberAppLocation);
   sideWindow.loadURL(emberAppLocation + '#/external-screen');
 
-  mainWindow.webContents.openDevTools();
-  sideWindow.webContents.openDevTools();
+  // mainWindow.webContents.openDevTools();
+  // sideWindow.webContents.openDevTools();
   // If a loading operation goes wrong, we'll send Electron back to
   // Ember App entry point
   mainWindow.webContents.on('did-fail-load', () => {

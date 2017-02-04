@@ -16,6 +16,13 @@ export default Ember.Service.extend({
     this.setMsg({numberPresent: 134, numberListening: 9});
   },
   setMsg(info) {
+    this._setMsg(info);
+    this.get('ipcRenderer').setMessage(info);
+  },
+  syncMsg(info) {
+    this._setMsg(info);
+  },
+  _setMsg(info) {
     this._scheduleClear();
     for (let property in info) this.get('msg').set(property, info[property]);
   },
