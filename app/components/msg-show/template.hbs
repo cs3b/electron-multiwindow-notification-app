@@ -1,7 +1,9 @@
 {{#if show}}
   {{#paper-list classNames="list-demo"}}
     {{#each messages as |item|}}
-      {{component item.component item=item}}
+      {{#if item.text }}
+        {{component item.component item=item}}
+      {{/if}}
     {{/each}}
   {{/paper-list}}
 {{/if}}

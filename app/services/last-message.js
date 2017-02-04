@@ -3,16 +3,18 @@ import Ember from 'ember';
 const {
   Object,
   computed,
-  run: { later }
+  run: { later, cancel }
 } = Ember;
 
 export default Ember.Service.extend({
+  nextClear: null,
   init() {
     this._super(...arguments);
     this.clear();
+    this.setMsg({numberPresent: 134, numberListening: 9});
   },
   setMsg(info) {
-    later(this, this.clear, 30*1000);
+    this._scheduleClear();
     for (let property in info) this.get('msg').set(property, info[property]);
   },
 
@@ -26,6 +28,12 @@ export default Ember.Service.extend({
       numberListening: null,
       comment: null,
     }));
+  },
+  _scheduleClear() {
+    if (this.get('nextClear')) {
+      cancel(this.get('nextClear'));
+    }
+    this.set('nextClear', later(this, this.clear, 30*1000));
   }
 
 });
