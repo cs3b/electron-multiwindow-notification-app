@@ -37,7 +37,7 @@ export default Ember.Service.extend({
   },
 
   start() {
-    this._start(new Date());
+    this._start(this._currentTime());
     this.get('ipcRenderer').setFirstTick(this.get('firstTick'));
   },
 
@@ -71,7 +71,7 @@ export default Ember.Service.extend({
 
   tick() {
     this.set('lastTick', new Date());
-    this.set('nextTick', later(this, this.tick, 1000))
+    this.set('nextTick', later(this, this.tick, (1000 - this.get('lastTick') % 1000)))
   },
 
   _format(value) {
@@ -86,5 +86,8 @@ export default Ember.Service.extend({
   _pause() {
     cancel(this.get('nextTick'));
     this.set('nextTick', null);
+  },
+  _currentTime() {
+    return new Date(Math.floor(new Date() / 1000)*1000)
   }
 });
