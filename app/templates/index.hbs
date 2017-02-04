@@ -1,10 +1,27 @@
-<div class="flex">
-  {{msg-form}}
-</div>
-<div class="flex">
-  {{msg-show}}
-</div>
+{{#paper-card classNames="form" as |card|}}
+  {{#card.content}}
+    {{msg-form}}
+  {{/card.content}}
+{{/paper-card}}
 
-<div class="flex">
-  {{timer-mng}}
-</div>
+{{#if showMessage}}
+  {{#paper-card classNames="panel" as |card|}}
+    {{#card.content}}
+      <div class="flex layout-row layout-align-center-center">
+        <div class="flex-50">
+          {{msg-show}}
+        </div>
+      </div>
+    {{/card.content}}
+  {{/paper-card}}
+{{/if}}
+
+
+{{#paper-card classNames="panel no-select" as |card|}}
+  {{#card.content}}
+    <div class="flex">
+      {{timer-mng}}
+    </div>
+  {{/card.content}}
+{{/paper-card}}
+

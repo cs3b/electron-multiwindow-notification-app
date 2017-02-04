@@ -13,7 +13,6 @@ export default Ember.Service.extend({
   init() {
     this._super(...arguments);
     this.clear();
-    this.setMsg({numberPresent: 134, numberListening: 9});
   },
   setMsg(info) {
     this._setMsg(info);

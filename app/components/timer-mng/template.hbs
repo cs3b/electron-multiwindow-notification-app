@@ -1,13 +1,21 @@
-{{timer-counter}}
-
 <div class="layout-row layout-align-center-center">
-  {{# if timer.ticking }}
-    <div {{action 'stop'}} class="flex-5">
-      {{paper-icon "pause-circle-outline" size=96}}
-    </div>
-  {{else}}
-    <div  {{action 'start'}} class="flex-5">
-      {{paper-icon "play-circle-outline" size=96}}
-    </div>
-  {{/if}}
+  <div class="flex-10 press-play">
+    {{#unless timer.ticking }}
+      <div {{ action 'start' }}>
+        {{paper-icon "play-circle-outline" size=96}}
+      </div>
+    {{/unless}}
+  </div>
+
+  <div class="flex-50">
+    {{timer-counter}}
+  </div>
+
+  <div class="flex-10 press-pause">
+    {{# if timer.ticking }}
+      <div {{action 'stop'}}>
+        {{paper-icon "pause-circle-outline" size=96}}
+      </div>
+    {{/if}}
+  </div>
 </div>

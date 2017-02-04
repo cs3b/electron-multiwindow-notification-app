@@ -75,7 +75,7 @@ export default Ember.Service.extend({
   },
 
   _format(value) {
-    return padStart(Math.round(value).toString(), 2, '0')
+    return padStart(Math.round(value), 2, '0')
   },
 
   _start(date) {
