@@ -1,0 +1,34 @@
+{{#paper-form onSubmit=(action 'submit' msg) as |form|}}
+  <div class="layout layout-row flex">
+    <div class="flex-20">
+      {{form.input label="obecnych"
+                   type="number"
+                   value=msg.numberPresent
+                   onChange=(action (mut msg.numberPresent))
+                   max=300
+                   icon="person"}}
+    </div>
+
+    <div class="flex-20">
+      {{form.input label="telefonicznie"
+                   type="number"
+                   max=30
+                   value=msg.numberListening
+                   onChange=(action (mut msg.numberListening))
+                   icon="phone"}}
+    </div>
+
+    <div class="flex">
+      {{form.input label="komunikat"
+                   textarea=true
+                   block=true
+                   maxlength=60
+                   passThru=(hash rows=1 maxRows=2)
+                   value=msg.comment
+                   onChange=(action (mut msg.comment)) }}
+    </div>
+
+    {{#form.submit-button raised=true primary=true}}Wyślij{{/form.submit-button}}
+
+  </div>
+{{/paper-form}}
