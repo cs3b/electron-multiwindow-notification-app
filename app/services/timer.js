@@ -4,10 +4,12 @@ import { padStart } from 'lodash/string';
 const {
   computed,
   computed: { notEmpty },
-  run: {cancel, later}
+  run: {cancel, later},
+  inject: { service }
 } = Ember;
 
 export default Ember.Service.extend({
+  ipcRenderer: service(),
   minutes: 0,
   seconds: 0,
   firstTick: null,
@@ -35,14 +37,25 @@ export default Ember.Service.extend({
   },
 
   start() {
-    this.reset();
-    this.set('firstTick', new Date());
-    this.tick();
+    this._start(new Date());
+    this.get('ipcRenderer').setFirstTick(this.get('firstTick'));
+  },
+
+  // specific for ipc callback
+  syncStart(date) {
+    this._start(date);
   },
 
   pause() {
     cancel(this.get('nextTick'));
     this.set('nextTick', null);
+    this.get('ipcRenderer').setLastTick(this.get('lastTick'));
+  },
+
+  // specific for ipc callback
+  syncPause(date) {
+    this._pause();
+    this.set('lastTick', date);
   },
 
   reset() {
@@ -63,5 +76,15 @@ export default Ember.Service.extend({
 
   _format(value) {
     return padStart(Math.round(value).toString(), 2, '0')
+  },
+
+  _start(date) {
+    this.reset();
+    this.set('firstTick', date);
+    this.tick();
+  },
+  _pause() {
+    cancel(this.get('nextTick'));
+    this.set('nextTick', null);
   }
 });

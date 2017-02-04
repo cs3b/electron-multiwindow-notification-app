@@ -3,10 +3,12 @@ import Ember from 'ember';
 const {
   Object,
   computed,
-  run: { later, cancel }
+  run: { later, cancel },
+  inject: { service }
 } = Ember;
 
 export default Ember.Service.extend({
+  ipcRenderer: service(),
   nextClear: null,
   init() {
     this._super(...arguments);
