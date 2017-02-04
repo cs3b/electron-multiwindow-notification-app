@@ -9,6 +9,7 @@ const dirname              = __dirname || path.resolve(path.dirname());
 const emberAppLocation     = `file://${dirname}/dist/index.html`;
 
 let mainWindow = null;
+let sideWindow = null;
 
 // Uncomment the lines below to enable Electron's crash reporter
 // For more information, see http://electron.atom.io/docs/api/crash-reporter/
@@ -28,11 +29,23 @@ app.on('window-all-closed', function onWindowAllClosed() {
 
 app.on('ready', function onReady() {
     mainWindow = new BrowserWindow({
+      title: 'Zegar - panel',
         width: 1200,
         height: 900
     });
 
     delete mainWindow.module;
+
+    sideWindow = new BrowserWindow({
+      title: 'Zegar - ekran',
+      width: 1200,
+      height: 900,
+      webPreferences: {
+        devTools: true
+      }
+    });
+
+    delete sideWindow.module;
 
     // If you want to open up dev tools programmatically, call
     // mainWindow.openDevTools();
@@ -44,6 +57,8 @@ app.on('ready', function onReady() {
     // config/environment.js file to 'hash'. For more information,
     // please consult the ember-electron readme.
     mainWindow.loadURL(emberAppLocation);
+    sideWindow.loadURL(emberAppLocation+'#/external-screen');
+    sideWindow.webContents.openDevTools();
 
     // If a loading operation goes wrong, we'll send Electron back to
     // Ember App entry point
@@ -65,6 +80,7 @@ app.on('ready', function onReady() {
     });
 
     mainWindow.on('closed', () => {
+        sideWindow.close();
         mainWindow = null;
     });
 

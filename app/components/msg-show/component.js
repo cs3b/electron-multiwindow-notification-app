@@ -11,7 +11,7 @@ export default Ember.Component.extend({
     let {numberPresent, numberListening, comment} = this.get('lastMessage.msg');
     return [
       {text: numberPresent, suffix: 'obecnych', icon: 'person', component: 'msg-show/people'},
-      {text: numberListening, suffix: 'przez łączą tel.', icon: 'phone', component: 'msg-show/people'},
+      {text: numberListening, suffix: 'przez łącza tel.', icon: 'phone', component: 'msg-show/people'},
       {text: comment, component: 'msg-show/pre'},
     ];
   })
