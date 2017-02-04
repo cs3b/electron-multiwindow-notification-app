@@ -29,7 +29,7 @@ export default Ember.Service.extend({
     let start = this.get('firstTick'),
       end = this.get('lastTick');
 
-    return Math.round((end - start) / 1000);
+    return Math.floor((end - start) / 1000);
   }),
 
   init() {
@@ -75,7 +75,7 @@ export default Ember.Service.extend({
   },
 
   _format(value) {
-    return padStart(Math.round(value), 2, '0')
+    return padStart(Math.floor(value), 2, '0')
   },
 
   _start(date) {
