@@ -60,8 +60,8 @@
       "package.json"
     ],
     "name": null,
-    "platform": null,
-    "arch": null,
+    "platform": "win32",
+    "arch": "x64",
     "version": null,
     "app-bundle-id": null,
     "app-category-type": null,
