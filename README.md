@@ -15,14 +15,11 @@ From manage window you can control notifications on the second window (separate 
 You will need the following things properly installed on your computer.
 
 * [Git](https://git-scm.com/)
-* [Node.js](https://nodejs.org/) (with NPM)
-* [Bower](https://bower.io/)
-* [Ember CLI](https://ember-cli.com/)
+* [Node.js >=6.x](https://nodejs.org/) (with NPM)
+* [Ember CLI >=2.11](https://ember-cli.com/)
 * [PhantomJS](http://phantomjs.org/)
 
 ## Installation
-
-Have node.js (>=6.x) and Ember-Cli (>=2.11.0) installed.
 
 * `git clone https://github.com/cs3b/electron-multiwindow-notification-app.git` this repository
 * `cd nat-app`
@@ -36,7 +33,15 @@ Have node.js (>=6.x) and Ember-Cli (>=2.11.0) installed.
 
 For detailed instructions look at: https://github.com/electron-userland/electron-packager
 
-`ember electron:package`
+````bash
+ember electron:package
+# if you have error about missing npm packages
+zsh -c "cd tmp/electron-build-tmp && npm i"
+# and run package once again
+ember electron:package
+# after successfull build remove unneeded node_modules (it will reduce package size by ~300M) 
+rm -rf electron-builds/nat-app-win32-x64/resources/app/node_modules
+````
 
 By default it will build win x64 build - see package.json if you want to change the platform.
 
