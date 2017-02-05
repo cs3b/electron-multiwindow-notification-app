@@ -52,7 +52,8 @@ app.on('ready', function onReady() {
   sideWindow = new BrowserWindow({
     title: 'Zegar - Ekran',
     width: 1200,
-    height: 800
+    height: 800,
+    frame: false
   });
 
   delete sideWindow.module;
