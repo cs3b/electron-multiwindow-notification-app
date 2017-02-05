@@ -1,7 +1,14 @@
 # nat-app
 
-This README outlines the details of collaborating on this Ember application.
-A short introduction of this app could easily go here.
+From manage window you can control notifications on the second window (separate screen).
+
+* start, stop, restart timer 
+
+![Time Elapsed](https://github.com/cs3b/electron-multiwindow-notification-app/raw/master/doc/time-elapsed.jpg)
+
+* send simple messsage 
+
+![Simple Message](https://github.com/cs3b/electron-multiwindow-notification-app/raw/master/doc/messages.jpg)
 
 ## Prerequisites
 
@@ -15,38 +22,29 @@ You will need the following things properly installed on your computer.
 
 ## Installation
 
-* `git clone <repository-url>` this repository
+Have node.js (>=6.x) and Ember-Cli (>=2.11.0) installed.
+
+* `git clone https://github.com/cs3b/electron-multiwindow-notification-app.git` this repository
 * `cd nat-app`
 * `npm install`
-* `bower install`
 
 ## Running / Development
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
-
-### Code Generators
-
-Make use of the many generators for code, try `ember help generate` for more details
-
-### Running Tests
-
-* `ember test`
-* `ember test --server`
+`ember electron`
 
 ### Building
 
-* `ember build` (development)
-* `ember build --environment production` (production)
+For detailed instructions look at: https://github.com/electron-userland/electron-packager
 
-### Deploying
+`ember electron:package`
 
-Specify what it takes to deploy your app.
+By default it will build win x64 build - see package.json if you want to change the platform.
 
 ## Further Reading / Useful Links
 
 * [ember.js](http://emberjs.com/)
 * [ember-cli](https://ember-cli.com/)
+* [ember-electron](https://github.com/felixrieseberg/ember-electron)
 * Development Browser Extensions
   * [ember inspector for chrome](https://chrome.google.com/webstore/detail/ember-inspector/bmdblncegkenkacieihfhpjfppoconhi)
   * [ember inspector for firefox](https://addons.mozilla.org/en-US/firefox/addon/ember-inspector/)
