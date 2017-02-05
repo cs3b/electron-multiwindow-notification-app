@@ -1,6 +1,6 @@
 {
   "name": "nat-app",
-  "version": "0.0.0",
+  "version": "0.2.0",
   "description": "Small description for nat-app goes here",
   "license": "MIT",
   "author": "",
@@ -62,7 +62,7 @@
     "name": null,
     "platform": "win32",
     "arch": "x64",
-    "version": null,
+    "version": "0.2.0",
     "app-bundle-id": null,
     "app-category-type": null,
     "app-copyright": null,

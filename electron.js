@@ -42,7 +42,7 @@ app.on('window-all-closed', function onWindowAllClosed() {
 
 app.on('ready', function onReady() {
   mainWindow = new BrowserWindow({
-    title: 'Zegar - Panel',
+    title: 'ZegarPanel',
     width: 1200,
     height: 800
   });
@@ -50,9 +50,12 @@ app.on('ready', function onReady() {
   delete mainWindow.module;
 
   sideWindow = new BrowserWindow({
-    title: 'Zegar - Ekran',
+    title: 'ZegarEkran',
     width: 1200,
     height: 800,
+    x: 10,
+    y: 10,
+    closable: false,
     frame: false
   });
 

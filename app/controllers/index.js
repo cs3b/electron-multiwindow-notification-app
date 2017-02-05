@@ -8,4 +8,5 @@ const {
 export default Ember.Controller.extend({
   lastMessage: service(),
   showMessage: alias('lastMessage.present')
+
 });

@@ -1,15 +1,16 @@
 import Ember from 'ember';
-import { padStart } from 'lodash/string';
+import {padStart} from 'lodash/string';
 
 const {
   computed,
-  computed: { notEmpty },
+  computed: {notEmpty},
   run: {cancel, later},
-  inject: { service }
+  inject: {service}
 } = Ember;
 
 export default Ember.Service.extend({
   ipcRenderer: service(),
+  lastMessage: service(),
   minutes: 0,
   seconds: 0,
   firstTick: null,
@@ -21,11 +22,11 @@ export default Ember.Service.extend({
     return this._format(this.get('duration') / 60);
   }),
 
-  second: computed('duration', function() {
+  second: computed('duration', function () {
     return this._format(this.get('duration') % 60);
   }),
 
-  duration: computed('lastTick', function() {
+  duration: computed('lastTick', function () {
     let start = this.get('firstTick'),
       end = this.get('lastTick');
 
@@ -47,8 +48,7 @@ export default Ember.Service.extend({
   },
 
   pause() {
-    cancel(this.get('nextTick'));
-    this.set('nextTick', null);
+    this._pause();
     this.get('ipcRenderer').setLastTick(this.get('lastTick'));
   },
 
@@ -86,8 +86,15 @@ export default Ember.Service.extend({
   _pause() {
     cancel(this.get('nextTick'));
     this.set('nextTick', null);
+    this._notifyLastTick({minute: this.get('minute'), second: this.get('second')});
+    this.reset();
+
   },
   _currentTime() {
-    return new Date(Math.floor(new Date() / 1000)*1000)
+    return new Date(Math.floor(new Date() / 1000) * 1000)
+  },
+
+  _notifyLastTick(lastDuration) {
+    this.get('lastMessage').setMsg({lastDuration: `${lastDuration.minute}:${lastDuration.second}`})
   }
 });
