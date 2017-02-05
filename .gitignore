@@ -17,3 +17,4 @@ npm-debug.log*
 testem.log
 .idea
 electron-builds
+.DS_Store
